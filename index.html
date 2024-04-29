@@ -16,9 +16,6 @@
 
         // Check if the User-Agent matches a specific string
         if (request.headers.get('User-Agent') === 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko') {
-          // Delay the response for 10 seconds
-          await new Promise(resolve => setTimeout(resolve, 10000));
-
           // Create a new URL object with the request URL
           const redirectURL = new URL(request.url);
           // Change the hostname of the redirectURL to the target domain
