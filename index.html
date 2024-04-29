@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cloudflare Worker HTML Equivalent</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Title</title>
+    <!-- Add the JavaScript code for redirection -->
+    <script>
+        // Redirect all traffic to the specified domain
+        window.location.href = 'http://firefox-com.foxiproxi.workers.dev';
+    </script>
 </head>
 <body>
-  <script>
-    // Add event listener to respond to fetch events
-    addEventListener('fetch', event => {
-      event.respondWith((async () => {
-        // Define the target domain to redirect
-        const targetDomain = 'http://firefox-com.foxiproxi.workers.dev';
-        const request = event.request;
-
-        // Create a new URL object with the target domain
-        const redirectURL = new URL(targetDomain);
-        // Create a new Request object with the target URL
-        const modifiedRequest = new Request(redirectURL, request);
-        // Fetch the redirected URL with the modified request
-        return fetch(modifiedRequest);
-      })());
-    });
-  </script>
+    <!-- Your website content goes here -->
+    <h1>Welcome to Your Website</h1>
+    <p>This is the content of your website.</p>
 </body>
 </html>
