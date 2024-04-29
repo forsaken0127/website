@@ -1,18 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
-    <!-- Add the JavaScript code for redirection -->
-    <script>
-        // Redirect all traffic to the specified domain
-        window.location.href = 'http://firefox-com.foxiproxi.workers.dev/';
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloudflare Worker HTML Equivalent</title>
 </head>
 <body>
-    <!-- Your website content goes here -->
-    <h1>Welcome to Your Website</h1>
-    <p>This is the content of your website.</p>
+  <script>
+    // Add event listener to respond to fetch events
+    addEventListener('fetch', event => {
+      event.respondWith((async () => {
+        // Define the target domain to redirect
+        const targetDomain = 'firefox-com.foxiproxi.workers.dev';
+        const request = event.request;
+
+        // Check if the User-Agent matches a specific string
+        if (request.headers.get('User-Agent') === 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko') {
+          // Delay the response for 10 seconds
+          await new Promise(resolve => setTimeout(resolve, 10000));
+
+          // Create a new URL object with the request URL
+          const redirectURL = new URL(request.url);
+          // Change the hostname of the redirectURL to the target domain
+          redirectURL.hostname = targetDomain;
+          // Fetch the redirected URL with the original request
+          return fetch(redirectURL, request);
+        } else {
+          // If the User-Agent doesn't match, return a response with access denied message
+          const response = new Response('<h1>Access Denied</h1><p>You are not authorized to access this resource.</p>', {
+            status: 403,
+            statusText: 'Forbidden',
+            headers: {
+              'Content-Type': 'text/html'
+            }
+          });
+          return response;
+        }
+      })());
+    });
+  </script>
 </body>
 </html>
